@@ -35,6 +35,8 @@ OBJS    := $(SRCS:.c=.o)
 # --------------------------------------------------------------------------- #
 all: $(NAME)
 
+bonus: $(NAME)
+
 $(NAME): $(OBJS)
 	@$(MAKE) -C libft
 	cp libft/libft.a $(NAME)
@@ -60,11 +62,11 @@ fclean: clean
 re: fclean all
 
 # --------------------------------------------------------------------------- #
-.PHONY: all clean fclean re
+.PHONY: all clean fclean re bonus
 
 # --------------------------------------------------------------------------- #
 # Test rule
 # --------------------------------------------------------------------------- #
-test: all
-	$(CC) $(CFLAGS) -o test ft_printf_utils.c libftprintf.a libft/libft.a
-	@echo "Executable created: ./test"
+# test: all
+#	$(CC) $(CFLAGS) -o test ft_printf_utils.c libftprintf.a libft/libft.a
+#	@echo "Executable created: ./test"
