@@ -133,7 +133,7 @@ int main(void)
     ft_printf("Space flag: % d\n", 42);
     ft_printf("Hash flag: %#x\n", 255);
     
-    return 0;
+    return (0);
 }
 ```
 
