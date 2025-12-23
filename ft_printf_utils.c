@@ -93,30 +93,3 @@ int	ft_print_base_unsigned(unsigned int nbr)
 	len++;
 	return (len);
 }
-
-/*
-#include <stdio.h>
-int	main(void)
-{
-	
-	// TEST FOR ft_print_str()
-	char	*str = "Hello!";
-	int len = print_str(str);
-
-	// TEST FOR ft_print_ptr(void *ptr)
-	char	*str = "Hello!";
-	int	len = ft_print_ptr(str);
-
-	// TEST FOR ft_print_base_unsigned
-	unsigned int	nbr = 012345;
-	int len = ft_print_base_unsigned(nbr);
-
-	// TEST FOR ft_print_base
-	int	nbr = -123;
-	int len = ft_print_base(nbr);
-
-	printf("\n%d\n", len);
-
-	return (0);
-}
-*/

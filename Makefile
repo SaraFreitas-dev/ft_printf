@@ -25,22 +25,29 @@ NAME    := libftprintf.a
 # ft_printf sources
 # --------------------------------------------------------------------------- #
 SRCS    := ft_printf.c \
-           ft_printf_utils.c \
-		   ft_flags_bonus.c
+           ft_printf_utils.c
 
-OBJS    := $(SRCS:.c=.o)
+BONUS_SRCS := ft_printf_bonus.c \
+			  ft_printf_utils.c \
+			  ft_flags_bonus.c
+
+OBJS        := $(SRCS:.c=.o)
+BONUS_OBJS  := $(BONUS_SRCS:.c=.o)
 
 # --------------------------------------------------------------------------- #
 # Rules
 # --------------------------------------------------------------------------- #
 all: $(NAME)
 
-bonus: $(NAME)
-
 $(NAME): $(OBJS)
 	@$(MAKE) -C libft
 	cp libft/libft.a $(NAME)
 	ar rcs $(NAME) $(OBJS)
+
+bonus: $(BONUS_OBJS)
+	@$(MAKE) -C libft
+	cp libft/libft.a $(NAME)
+	ar rcs $(NAME) $(BONUS_OBJS)
 
 # --------------------------------------------------------------------------- #
 # Generic compile rule
@@ -53,20 +60,13 @@ $(NAME): $(OBJS)
 # --------------------------------------------------------------------------- #
 clean:
 	@$(MAKE) -C libft clean
-	rm -f $(OBJS)
+	rm -f $(OBJS) $(BONUS_OBJS)
 
 fclean: clean
 	@$(MAKE) -C libft fclean
-	rm -f $(NAME)
+	rm -f $(OBJS) $(NAME) $(BONUS_OBJS)
 
 re: fclean all
 
 # --------------------------------------------------------------------------- #
 .PHONY: all clean fclean re bonus
-
-# --------------------------------------------------------------------------- #
-# Test rule
-# --------------------------------------------------------------------------- #
-# test: all
-#	$(CC) $(CFLAGS) -o test ft_printf_utils.c libftprintf.a libft/libft.a
-#	@echo "Executable created: ./test"

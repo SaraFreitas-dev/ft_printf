@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*   ft_printf_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sarfreit <sarfreit@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/13 02:34:46 by sarfreit          #+#    #+#             */
-/*   Updated: 2025/12/13 02:34:46 by sarfreit         ###   ########.fr       */
+/*   Created: 2025/12/13 02:34:13 by sarfreit          #+#    #+#             */
+/*   Updated: 2025/12/13 02:34:13 by sarfreit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "ft_bonus.h"
 
 int	ft_print_c(int c)
 {
@@ -18,7 +18,7 @@ int	ft_print_c(int c)
 	return (1);
 }
 
-int	ft_handle_conversion(char type, va_list args)
+int	ft_handle_conversion(char type, va_list args, t_flags flags)
 {
 	int				len;
 
@@ -30,11 +30,11 @@ int	ft_handle_conversion(char type, va_list args)
 	else if (type == 'p')
 		len += ft_print_ptr(va_arg(args, void *));
 	else if ((type == 'd') || (type == 'i'))
-		len += ft_print_base(va_arg(args, int));
+		len += ft_counter_with_flags(args, flags, type);
 	else if (type == 'u')
 		len += ft_print_base_unsigned(va_arg(args, unsigned int));
 	else if ((type == 'x') || (type == 'X'))
-		len += ft_puthex_unsigned(va_arg(args, unsigned int), type);
+		len += ft_counter_with_flags(args, flags, type);
 	else if (type == '%')
 		len += ft_print_c('%');
 	return (len);
@@ -45,6 +45,7 @@ int	ft_printf(const char *format, ...)
 	int		counter;
 	int		i;
 	va_list	args;
+	t_flags	flags;
 
 	counter = 0;
 	i = 0;
@@ -56,9 +57,8 @@ int	ft_printf(const char *format, ...)
 		if (format[i] == '%')
 		{
 			i++;
-			if (!format[i])
-				break ;
-			counter += ft_handle_conversion(format[i], args);
+			flags = ft_parse_flags(format, &i);
+			counter += ft_handle_conversion(format[i], args, flags);
 		}
 		else
 			counter += ft_print_c(format[i]);

@@ -1,6 +1,8 @@
-# 🧵 ft_printf
+*This project has been created as part of the 42 curriculum by sarfreit.*
 
-**ft_printf** is a 42 project that recreates part of the behavior of the standard `printf()` function from libc.  
+# Description
+
+**ft_printf** is a 42 project that recreates part of the behavior of the standard `printf()` function.  
 It strengthens your skills in:
 - handling variadic arguments (`va_list`)
 - manual data formatting
@@ -67,27 +69,8 @@ This project implements the bonus flag set allowed by the subject:
 - `#` only affects `%x` and `%X`
 - `#` does not add prefix when the number is 0
 
-**According to the subject:**
-> You only need to implement one bonus set.  
-> This project implements: `#`, `+`, and space.
+Other flags such as width, precision, `-`, `0`, and `*` are not implemented.
 
----
-
-## 📁 Project Structure
-
-```
-ft_printf/
-├── ft_printf.c
-├── ft_printf.h
-├── ft_printf_utils.c
-├── ft_flags_bonus.c
-├── libft/
-│   ├── *.c
-│   └── libft.a
-└── Makefile
-```
-
----
 
 ## 🔍 How It Works
 
@@ -101,55 +84,55 @@ ft_printf/
 
 ---
 
-## ⚙️ Compilation
+## Instructions
 
-Build the library:
+1. **Preparation (Compiling `libftprintf.a`):**
+    ```bash
+    make all
+    ```
+
+2. **Compilation and Linking:**
+    ```bash
+    # Link main_mandatory.c against libftprintf.a and libft.a
+    cc -Wall -Wextra -Werror main_mandatory.c libftprintf.a -I . -L libft -lft -o test_mandatory
+    ```
+
+3. **Execution:**
+    ```bash
+    ./test_mandatory
+    ```
+
+1. **Preparation (Compiling `libftprintf.a` with Bonus features):**
+    ```bash
+    make bonus
+    ```
+
+2. **Compilation and Linking:**
+    ```bash
+    # Link main_bonus.c against the bonus libftprintf.a and libft.a
+    cc -Wall -Wextra -Werror main_bonus.c libftprintf.a -I . -L libft -lft -o test_bonus
+    ```
+
+3. **Execution:**
+    ```bash
+    ./test_bonus
+    ```
+
+Check for memory leaks:
 ```bash
-make
+valgrind --leak-check=full ./test_mandatory
+valgrind --leak-check=full ./test_bonus
 ```
 
-Use it in your program:
+Clean the project:
 ```bash
-cc -Wall -Wextra -Werror main.c libftprintf.a -I .
+make clean
+make fclean
+make re
 ```
 
 ---
 
-## 🧪 Example Usage
+## Resources
 
-```c
-int main(void)
-{
-    ft_printf("Char: %c\n", 'A');
-    ft_printf("String: %s\n", "Hello");
-    ft_printf("Pointer: %p\n", NULL);
-    ft_printf("Decimal: %d\n", -42);
-    ft_printf("Unsigned: %u\n", 4242);
-    ft_printf("Hex: %x / %X\n", 255, 255);
-    ft_printf("Percent: %%\n");
-    
-    // Bonus flags
-    ft_printf("Plus flag: %+d\n", 42);
-    ft_printf("Space flag: % d\n", 42);
-    ft_printf("Hash flag: %#x\n", 255);
-    
-    return (0);
-}
-```
-
----
-
-## 🧾 Notes
-
-- Fully compliant with the 42 Norm
-- No forbidden functions
-- Bonus is evaluated only if mandatory part is perfect
-- `%p` must print `(nil)` for null pointers
-- Every printed character must be counted precisely
-
----
-
-## 📜 License
-
-This project is part of the 42 curriculum.  
-You may read and study the code — just make sure you truly understand it. ✨
+For this project I used the help of some GitBooks from older students, and websites like GeeksforGeeks and W3Schools.
